@@ -1,0 +1,253 @@
+
+
+What is EC2
+===========================
+
+<!--  
+
+AWS defines it as Elastic Compute Cloud.
+
+It’s a virtual environment where “you rent” to have your environment created, without purchasing. 
+
+Amazon refers to these virtual machines as Instances.
+
+Preconfigured templates can be used to launch instances. These templates are referred to as images. Amazon provides these images in the form of AMIs (Amazon Machine Images).
+
+Allows you to install custom applications and services.
+
+Scaling of infrastructure i.e., up or down is easy based on the demand you face.
+
+AWS provides multiple configurations of CPU, memory, storage etc., through which you can pick the flavor that's required for your environment.
+
+No limitation on storage. You can pick the storage based on the type of the instance that you are working on.
+
+Temporary storage volumes are provided, which are called Instance Store Volumes.  Data stored in this gets deleted once the instance is terminated.
+
+Persistent storage volumes are available and are referred to as EBS (Elastic Block Store) volumes.
+
+These instances can be placed at multiple locations which are referred to as Regions and Availability Zones (AZ).
+
+You can have your Instances distributed across multiple AZs i.e., within a single Region, so that if an instance fails, AWS automatically remaps the address to another AZ.
+
+Instances deployed in one AZ can be migrated to another AZ.
+
+To manage instances, images, and other EC2 resources, you can optionally assign your own metadata to each resource in the form of tags.
+
+A Tag is a label that you assign to an AWS resource.  It contains a key and an optional value, both of which are defined by you.
+
+Each AWS account comes with a set of default limits on the resources on a per-Region basis.
+
+For any increase in the limit you need to contact AWS.
+
+To work with the created instances, we use Key Pairs. 
+-->
+*****************************************************************************************************************************************************************************************++++++++++++++++++++++++++++************************************************
+
+
+
+What is EC2 Spot Instance
+================================================
+
+<!--  
+Spot Instances are an unused part of Amazon EC2, using which you can save up to 90% on cost as compared to On-Demand cost, but AWS can interrupt your spot instances if the Current Price is higher than the Maximum Price you specified.
+
+Spot uses the same EC2 instances (AMI and instance type) what On-Demand and Reserved Instances use. It is the best to fit for use cases where data is reproducible and can sustain the interruption at any point in time.
+
+You can use Spot Instance as additional compute capacity to your On-Demand or Reserved Instances, where fault-tolerant is acceptable.
+
+EC2 Spot Instances can be launched the same way you launch EC2 Instance, like using Spot Fleet. Auto Scaling Groups or AWS Management Console.
+
+If AWS terminates or stops your Amazon EC2 Spot Instance within an hour then you will not be charged.
+
+However, if you choose to stop or terminate your newly launched Spot Instances by yourself, you will have to pay for the total number of seconds you have used.
+-->
+
+============================88888888888888888888888888888888=======================================================================
+
+What is S3?
+=======================
+<!--
+
+S3 stands for Simple Storage Service.
+
+It provides object storage through a web service interface.
+
+Each object is stored as a file with its metadata included and is given an ID number.
+
+Objects uploaded to S3 are stored in containers called “Buckets”, whose names are globally unique. They organize the Amazon S3 namespace at the highest level.
+
+Amazon S3 creates buckets in the region you specify.
+
+You can assign permissions to these buckets to provide or restrict data transactions.
+
+Applications use this ID number to access an object.
+
+Developers can access an object via a REST API.
+
+S3 supports upload of objects.
+
+It uses the same scalable storage infrastructure that Amazon.com uses to run its global e-commerce network.
+
+It's designed for storing online backup and archiving of data and applications on AWS.
+
+Storage classes provided are:
+
+Standard
+
+Standard_IA i.e., Standard Infrequent Access
+
+Intelligent_Tiering
+
+OneZone_IA
+
+Glacier
+
+Deep_Archive
+
+RRS i.e., Reduced Redundancy Storage (Not recommended by AWS)
+
+Data access is provided through the S3 Console.
+
+Data stored can be either Public or Private based on user requirement.
+
+Data stored can be encrypted.
+
+We can define life-cycle policies which can help in automation of data transfer, retention and deletion.
+
+Amazon Athena can be used to "query" S3 data.
+
+-->
+===================================================================================================================================
+=============================================***********************************===================================================
+===================================================================================================================================
+
+
+What is AMI?
+============================================================
+<!--
+AMI stands for Amazon Machine Image.
+
+It's a master image for the creation of virtual servers i.e., EC2 instances in the AWS environment.
+
+They are like templates that are configured with an operating system and other software, which determine the user's operating environment.
+
+AMIs are categorized according to region, operating system, system architecture (32 or 64 bit), launch permissions and whether they are backed by Amazon EBS or by the Instance Store.
+
+AMI includes a template for the root volume required for an instance; typical example might contain an operating system, an application server and applications.
+
+When you launch an instance, the root device volume contains the image used to boot the instance.
+
+In the initial stages, all AMIs were backed by the Amazon EC2 Instance Store. This means the root device for an instance launched from the AMI is an Instance Store volume created from a template stored in Amazon S3.
+
+Any data on the instance store volumes persists as-long-as the instance is running i.e., the data gets deleted once the instance is terminated.
+
+Instance store backed instances do not support the Stop action.
+
+If using an instance store is required, Amazon recommends distributing the data across multiple Availability Zones.
+
+After the introduction of Amazon EBS, Amazon introduced AMIs that are backed by Amazon EBS i.e., the root device for an instance launched from the AMI is an Amazon EBS volume created from an EBS Snapshot.
+
+Amazon recommends using EBS backed AMIs, because they launch faster and use persistent storage.
+
+Amazon EBS backed instances can be stopped and later restarted without affecting data stored in the attached volumes.
+
+Permissions are controlled to constrain AMIs for instance launches to the appropriate AWS accounts.
+
+A block device mapping ensures that the correct volumes are attached to the launched instance.
+
+Users have the facility of selecting AMI provided by AWS, the user community, or through the AWS Marketplace.
+
+Users can also create their own AMIs and share them within the same region or across regions.
+
+-->
+=====================================================================================================================================================================================================================================================================
+
+What is VPC?
+===================================
+<!--VPC stands for Virtual Private Cloud.
+
+It’s a custom-defined virtual network within the AWS Cloud.
+
+Users can logically create their personal network, designing and implementing a separate and independent network that would operate in the AWS Cloud.
+
+Primary components are : Subnets, IP addresses, NAT Devices (Instances & Gateways), Route Tables, Internet & Virtual Private Gateways, Access Control Lists, Security groups, VPC Endpoints.
+
+A subnet is a segment of the VPC IP address range, where we can launch EC2 Instances, RDS, and other AWS resources.
+
+Subnet are further classified as Public and Private.
+
+Public subnets hold resources that can be accessed from the Internet.
+
+Common attributes for instances in Public Subnets to have are:
+
+Elastic IP (EIP) address or Public IP address attached to the EC2 instance.
+
+IGW attached to the VPC.
+
+The subnet must have a route table entry with destination as internet gateway (IGW) 0.0.0.0/0.
+
+Security groups and NACLs should not block remove access.
+
+Public subnets are associated with a route table that directs subnet traffic to the internet using an Internet Gateway.
+
+Private subnets hold resources that can be accessed from within the VPC network.
+
+Multiple subnets can be associated with a single route table. However, a single subnet cannot be associated with multiple route tables.
+
+Route tables hold sets of rules, called routes that are used to determine where the traffic is directed.
+
+Every subnet in a VPC is linked to the route table.
+
+Primary or Main route tables are the ones that automatically come with your VPC.  They control the routing for all subnets that are not explicitly associated with any other route table.
+
+The default route table cannot be deleted.
+
+Custom route tables are the ones you create for your VPC, and you can add routes as needed.
+
+Custom route tables can be deleted when not required.
+
+Internet Gateway (IGW) is a virtual router which helps a VPC connect to the Internet.
+
+By default, instances that are launched in a VPC cannot communicate with the Internet. To enable Internet access, Internet gateway needed to be attached to the VPC.
+
+Public subnets gets connected to IGW through route tables to get accessed over the Internet.
+
+Internet Gateways are horizontally scalable, highly available and redundant.
+
+EIP, Elastic IP address is a static IPv4 address used by AWS to manage its dynamic cloud computing services.
+
+It is associated with an AWS Account, and you can use it to mask if an instance failure occurs i.e., if a server fails, we can map this IP address to another server and keep moving without any issues.
+
+NAT devices can be either an Instance / Gateway residing in Public subnet, (to which an EIP is assigned).
+
+NAT devices help instances in Private subnets interact with the Internet.
+
+Access Control List (ACL) is an optional layer of security that acts as a firewall for controlling network traffic in and out of the subnet.
+
+Rules are defined with the ACL for allowing or denying network traffic either on ports / IP addresses.
+-->
+
+Basic Understanding before we start building VPC from scratch
+
+====================================================================
+<!--
+When you create an Amazon AWS VPC, you specify a set of IP addresses in the form of a Classless Inter-Domain Routing (CIDR) block (Ex: 10.0.0.0/16).
+
+You can assign a single CIDR block to a VPC. The allowed block size is between a /28 netmask and /16 netmask. In other words, the VPC can contain from 16 to 65,536 IP addresses.
+ -->
+
+
+ Amazon Virtual Private Cloud
+ ========================================
+ <!--
+Amazon Virtual Private Cloud (Amazon VPC) lets you provision a logically-isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment, including the selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.
+
+You can use both IPv4 and IPv6 in your VPC for secure and easy access to resources and applications.
+
+You can easily customize the network configuration of your Amazon VPC. For example, you can create a public-facing subnet for your web servers that have access to the internet.
+
+You can also place your backend systems, such as databases or application servers, in a private-facing subnet with no internet access. You can use multiple layers of security, including security groups and network access control lists, to help control access to Amazon EC2 instances in each subnet.
+   -->
+
+
+   
